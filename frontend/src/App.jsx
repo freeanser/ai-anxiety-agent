@@ -1,46 +1,48 @@
-// frontend/src/App.jsx
-// 
+// 測試用 App.jsx (階段四)
 import React, { useState } from 'react';
-import { useOceanSound } from './hooks/useOceanSound';
-import Mailbox from './components/features/Mailbox';
-import FirstAid from './components/features/FirstAid';
+import InitialView from './components/views/InitialView';
+import RoomView from './components/views/RoomView';
 import { INITIAL_LETTERS } from './data/constants';
 
 export default function App() {
-  const { isPlaying, toggleSound } = useOceanSound();
-  const [showMail, setShowMail] = useState(false);
-  const [showAid, setShowAid] = useState(false);
+  // 手動切換這裡的字串來測試不同頁面: 'initial' | 'room'
+  const [view, setView] = useState('initial');
+
+  // 模擬一些假資料
+  const [userName, setUserName] = useState('');
+  const [userGoal, setUserGoal] = useState('');
+  const [selectedRecharge, setSelectedRecharge] = useState([]);
 
   return (
-    <div className="p-10 min-h-screen bg-gray-200 flex flex-col gap-4 items-center justify-center">
-      <h1 className="text-xl font-bold">第三階段驗收：功能模組</h1>
+    <>
+      <div className="fixed top-0 left-0 bg-black/80 text-white p-2 z-[9999]">
+        <span className="mr-2">開發者控制台:</span>
+        <button onClick={() => setView('initial')} className="mr-2 underline">初始頁</button>
+        <button onClick={() => setView('room')} className="underline">房間頁</button>
+      </div>
 
-      <button onClick={toggleSound} className="px-4 py-2 bg-blue-500 text-white rounded">
-        {isPlaying ? '停止海浪聲' : '播放海浪聲'}
-      </button>
+      {view === 'initial' && (
+        <InitialView
+          userName={userName} setUserName={setUserName}
+          beanName="豆豆" setBeanName={() => { }}
+          userGoal={userGoal} setUserGoal={setUserGoal}
+          selectedRecharge={selectedRecharge}
+          toggleRecharge={(item) => setSelectedRecharge(prev => [...prev, item])}
+          onSubmit={() => alert('送出表單!')}
+          isLoading={false}
+        />
+      )}
 
-      <button onClick={() => setShowMail(true)} className="px-4 py-2 bg-yellow-600 text-white rounded">
-        打開信箱
-      </button>
-
-      <button onClick={() => setShowAid(true)} className="px-4 py-2 bg-red-500 text-white rounded">
-        打開急救中心
-      </button>
-
-      {/* 彈窗組件放在這裡 */}
-      <Mailbox
-        isOpen={showMail}
-        onClose={() => setShowMail(false)}
-        letters={INITIAL_LETTERS}
-        onSelectLetter={(l) => alert(l.title)}
-      />
-
-      <FirstAid
-        isOpen={showAid}
-        onClose={() => setShowAid(false)}
-        userName="測試者"
-        beanName="豆豆"
-      />
-    </div>
+      {view === 'room' && (
+        <RoomView
+          userName="測試船長"
+          beanName="豆豆"
+          todoList={[{ id: 1, title: "測試任務", completed: false, time: 0, isRunning: false }]}
+          energy="high"
+          onOpenMailbox={() => alert('開信箱')}
+        // ... 其他 props 可以先傳空函式 () => {}
+        />
+      )}
+    </>
   );
 }
