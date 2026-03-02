@@ -1,4 +1,6 @@
-// src/components/visuals/CaptainCharacter
+// next-app/src/components/visuals/CaptainCharacter
+
+"use client";
 import React from 'react';
 const CaptainCharacter = () => (
 

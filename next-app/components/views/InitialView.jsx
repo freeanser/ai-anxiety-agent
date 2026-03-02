@@ -1,5 +1,6 @@
-// src / components / views / InitialView.jsx
+// next-app/src / components / views / InitialView.jsx
 
+"use client";
 import React from 'react';
 import CuteBean from '../visuals/CuteBean';
 import { RECHARGE_OPTIONS } from '../../data/constants';

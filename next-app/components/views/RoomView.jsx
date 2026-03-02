@@ -1,5 +1,6 @@
-// src/components/views/RoomView.jsx
+// next-app/src/components/views/RoomView.jsx
 
+"use client";
 import React from 'react';
 import { Settings, Volume2, VolumeX, Map, Mail, Battery, Coffee, Play, Pause, Check } from 'lucide-react';
 import CozyRoomScene from '../layout/CozyRoomScene';

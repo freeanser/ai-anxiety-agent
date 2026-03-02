@@ -1,4 +1,6 @@
-// src/components/features/FirstAid.jsx
+// next-app/src/components/features/FirstAid.jsx
+
+"use client";
 import React, { useState, useEffect } from 'react';
 import { BriefcaseMedical, X, Wind, Zap, Mic, Flame } from 'lucide-react';
 
@@ -69,38 +71,78 @@ const FirstAid = ({
   };
 
   // --- Gemini API 分析邏輯 (焦慮粉碎機) ---
+  // const analyzeWorries = async () => {
+  //   if (!worryInput.trim()) return;
+  //   setIsLoading(true);
+  //   try {
+  //     const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
+  //       method: 'POST',
+  //       headers: { 'Content-Type': 'application/json' },
+  //       body: JSON.stringify({
+  //         contents: [{
+  //           parts: [{
+  //             text: `你是一位溫暖的心理支持夥伴${beanName}。使用者正在使用「焦慮粉碎機」。使用者的煩惱是：「${worryInput}」。
+  //                    請分析這段煩惱，找出其中使用者「無法完全掌控」的因素（例如：他人的想法、他人的情緒、過去已發生的事、未來的結果、運氣、天氣等）。
+  //                    請不要列出使用者可以掌控的事（如「準備面試」、「努力練習」）。
+  //                    請回傳 JSON 格式，包含一個 uncontrollable_factors 陣列，裡面是簡短的名詞或短句（例如「主考官的心情」、「明天的天氣」）。`
+  //           }]
+  //         }],
+  //         generationConfig: {
+  //           responseMimeType: "application/json",
+  //           responseSchema: {
+  //             type: "OBJECT",
+  //             properties: {
+  //               uncontrollable_factors: {
+  //                 type: "ARRAY",
+  //                 items: { type: "STRING" }
+  //               }
+  //             }
+  //           }
+  //         }
+  //       })
+  //     });
+  //     const data = await response.json();
+  //     const result = JSON.parse(data.candidates?.[0]?.content?.parts?.[0]?.text);
+
+  //     if (result && result.uncontrollable_factors && result.uncontrollable_factors.length > 0) {
+  //       setAnalyzedWorries(result.uncontrollable_factors);
+  //     } else {
+  //       setAnalyzedWorries(['外界的看法', '不可控的結果']);
+  //     }
+  //     setShreddingStep('analysis');
+  //   } catch (error) {
+  //     console.error("Analysis failed", error);
+  //     setAnalyzedWorries(['外界的看法', '不可控的結果']);
+  //     setShreddingStep('analysis');
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
+
+  // --- Gemini API 分析邏輯 (焦慮粉碎機) ---
   const analyzeWorries = async () => {
     if (!worryInput.trim()) return;
     setIsLoading(true);
     try {
-      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
+      // 1. 準備好要給 AI 的完整提示詞
+      const promptText = `你是一位溫暖的心理支持夥伴${beanName}。使用者正在使用「焦慮粉碎機」。使用者的煩惱是：「${worryInput}」。
+      請分析這段煩惱，找出其中使用者「無法完全掌控」的因素（例如：他人的想法、他人的情緒、過去已發生的事、未來的結果、運氣、天氣等）。
+      請不要列出使用者可以掌控的事（如「準備面試」、「努力練習」）。
+      請只回傳乾淨的 JSON 格式，包含一個 uncontrollable_factors 陣列，裡面是簡短的名詞或短句（例如「主考官的心情」、「明天的天氣」），不要包含其他 Markdown 標籤。`;
+
+      // 2. 呼叫你自己的 Next.js 後端 (不用帶 Key！)
+      const response = await fetch('/api/gemini', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          contents: [{
-            parts: [{
-              text: `你是一位溫暖的心理支持夥伴${beanName}。使用者正在使用「焦慮粉碎機」。使用者的煩惱是：「${worryInput}」。
-                     請分析這段煩惱，找出其中使用者「無法完全掌控」的因素（例如：他人的想法、他人的情緒、過去已發生的事、未來的結果、運氣、天氣等）。
-                     請不要列出使用者可以掌控的事（如「準備面試」、「努力練習」）。
-                     請回傳 JSON 格式，包含一個 uncontrollable_factors 陣列，裡面是簡短的名詞或短句（例如「主考官的心情」、「明天的天氣」）。`
-            }]
-          }],
-          generationConfig: {
-            responseMimeType: "application/json",
-            responseSchema: {
-              type: "OBJECT",
-              properties: {
-                uncontrollable_factors: {
-                  type: "ARRAY",
-                  items: { type: "STRING" }
-                }
-              }
-            }
-          }
-        })
+        body: JSON.stringify({ prompt: promptText })
       });
+
       const data = await response.json();
-      const result = JSON.parse(data.candidates?.[0]?.content?.parts?.[0]?.text);
+
+      // 3. 解析後端傳回來的資料
+      // (假設後端已經幫我們把 Google 囉嗦的結構拆解，只傳回純文字字串)
+      const resultText = data.text;
+      const result = JSON.parse(resultText);
 
       if (result && result.uncontrollable_factors && result.uncontrollable_factors.length > 0) {
         setAnalyzedWorries(result.uncontrollable_factors);

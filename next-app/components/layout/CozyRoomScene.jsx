@@ -1,4 +1,6 @@
-// src/components/layout/CozyRoomScene.jsx
+// next-app/src/components/layout/CozyRoomScene.jsx
+
+"use client";
 import React from 'react';
 import CaptainCharacter from '../visuals/CaptainCharacter';
 

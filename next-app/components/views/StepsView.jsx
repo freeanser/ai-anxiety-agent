@@ -1,5 +1,6 @@
-// src/components/views/StepsView.jsx
+// next-app/src/components/views/StepsView.jsx
 
+"use client";
 import React from 'react';
 import { ArrowLeft, Check, Plus, Loader } from 'lucide-react';
 import CuteBean from '../visuals/CuteBean';

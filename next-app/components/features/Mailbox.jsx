@@ -1,4 +1,6 @@
-// src/components/features/Mailbox.jsx
+// next-app/public/src/components/features/Mailbox.jsx
+
+"use client";
 import React from 'react';
 import { Mail, X, ArrowLeft } from 'lucide-react';
 

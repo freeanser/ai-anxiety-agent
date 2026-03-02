@@ -1,4 +1,6 @@
-// src/components/visuals/NurseBean.jsx
+// next-app/src/components/visuals/NurseBean.jsx
+
+"use client";
 import React from 'react';
 const NurseBean = () => (
 

@@ -1,5 +1,6 @@
-// src/data/constants.js
+// next-app/src/data/constants.js
 
+"use client";
 export const INITIAL_LETTERS = [
   {
     id: 1,

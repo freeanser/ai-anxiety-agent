@@ -1,4 +1,7 @@
-// src/hooks/useOceanSound.js
+// next-app/src/hooks/useOceanSound.js
+
+"use client";
+
 // Use Web Audio API to create ocean sound effect
 import { useState, useRef } from 'react';
 

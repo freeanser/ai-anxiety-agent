@@ -1,17 +1,22 @@
-// src / App.jsx
+// next-app/src/app/page.js
+"use client"; // 🌟 必加：告訴 Next.js 這是一個需要互動的客戶端元件
+
 import React, { useState, useEffect } from 'react';
-import { useOceanSound } from './hooks/useOceanSound';
-import { generateStepsAPI, generatePlanAPI, processUnplannedTaskAPI } from './services/api';
-import { INITIAL_LETTERS } from './data/constants';
+
+// 🌟 修改：路徑前面全部加上 ../
+import { useOceanSound } from '../hooks/useOceanSound';
+import { generateStepsAPI, generatePlanAPI, processUnplannedTaskAPI } from '../services/api';
+import { INITIAL_LETTERS } from '../data/constants';
 
 // Views
-import InitialView from './components/views/InitialView';
-import StepsView from './components/views/StepsView';
-import RoomView from './components/views/RoomView';
-import DeckView from './components/views/DeckView';
+import InitialView from '../components/views/InitialView';
+import StepsView from '../components/views/StepsView';
+import RoomView from '../components/views/RoomView';
+import DeckView from '../components/views/DeckView';
+
 // Features
-import Mailbox from './components/features/Mailbox';
-import FirstAid from './components/features/FirstAid';
+import Mailbox from '../components/features/Mailbox';
+import FirstAid from '../components/features/FirstAid';
 
 export default function App() {
   // --- Global State ---
@@ -44,6 +49,7 @@ export default function App() {
   const handleGoalSubmit = async () => {
     setIsLoading(true);
     try {
+      // 這裡完全不用改！它會自動去找我們寫好的 api.js，然後 api.js 會去找後端 /api/gemini
       const data = await generateStepsAPI(userGoal);
       setGeneratedSteps(data?.steps || ['制定計畫', '執行行動', '休息']);
       setView('steps');
@@ -64,7 +70,7 @@ export default function App() {
       setDetailedPlan(plan);
       const flatPlan = Object.values(plan).flat();
       setMonthlyPlan(flatPlan);
-      setView('main'); // 或跳轉到 planPreview
+      setView('main');
     } catch (e) {
       console.error(e);
       setView('main');
@@ -99,6 +105,7 @@ export default function App() {
   }, []);
 
   // --- Render ---
+  // (Render 區塊完全不用動，維持原樣！)
 
   return (
     <>

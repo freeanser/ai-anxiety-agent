@@ -1,4 +1,6 @@
-// src/components/visuals/CuteBean.jsx
+// next-app/src/components/visuals/CuteBean.jsx
+
+"use client";
 import React from 'react';
 
 const CuteBean = ({ emotion = 'happy', pose = 'standing' }) => (
