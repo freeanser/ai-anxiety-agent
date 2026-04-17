@@ -8,7 +8,7 @@
 
 **Regain your focus and peace of mind through AI-driven automation.**
 
-In an era of information overload and rapid AI advancement, "AI Anxiety" is real. This project is a specialized **Gemini-powered automation agent** designed to help users manage stress, filter digital noise, and provide actionable insights to turn anxiety into productivity.
+In an era of information overload and rapid AI advancement, "AI Anxiety" is real. This project is a specialized **Next.js full-stack application** powered by **Gemini agent**. It is designed to help users manage stress, filter digital noise, and provide actionable insights to turn anxiety into productivity.
 
 ---
 
@@ -34,14 +34,14 @@ To ensure stable, high-quality output even when facing unstructured noise or emo
 ### Prerequisites
 
 * A Google AI Studio API Key. [Get it here](https://aistudio.google.com/).
-* Python 3.10+ or Node.js (depending on your implementation).
+* Node.js 18.x or later.
 
 ### Installation
 
 ```bash
 git clone https://github.com/your-username/gemini-anxiety-agent.git
 cd gemini-anxiety-agent
-pip install -r requirements.txt
+npm install
 
 ```
 
@@ -54,6 +54,8 @@ GEMINI_API_KEY=your_api_key_here
 
 ```
 
+### Running the App
+npm run dev
 
 ## License
 
