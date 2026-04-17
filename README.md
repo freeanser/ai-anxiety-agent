@@ -19,6 +19,12 @@ In an era of information overload and rapid AI advancement, "AI Anxiety" is real
 * **Emotional Trend Analysis:** Tracks your input over time to identify triggers and suggest personalized coping strategies.
 * **Gemini 1.5 Flash Integration:** Optimized for speed and responsiveness, ensuring support is there exactly when you need it.
 
+## Hybrid Routing & Guardrails
+To ensure stable, high-quality output even when facing unstructured noise or emotional input, this project implements a two-stage AI routing architecture:
+![planning_page](next-app/assets/planning.png)
+
+- (Note: Yellow highlights indicate simulated emotional noise used for testing system robustness.)
+
 ## Getting Started
 
 ### Prerequisites
