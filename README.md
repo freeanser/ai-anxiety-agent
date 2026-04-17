@@ -25,7 +25,7 @@ To ensure stable, high-quality output even when facing unstructured noise or emo
 
 * *Note: Yellow highlights indicate simulated emotional noise used for testing system robustness.*
 
-* **Intent Extraction:** The initial classifier cold-filters through emotional "noise" to precisely identify the user's core objectives (e.g., specific career goals).
+* **Intent Extraction:** The initial classifier cold-filters through emotions to precisely identify the user's core objectives (e.g., specific career goals).
 
 * **Expert Guardrails:** Based on the identified intent, the system dynamically injects domain-specific rules. This blocks meaningless AI slogans and ensures the final output consists of specialized, actionable steps.
 
