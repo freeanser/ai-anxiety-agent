@@ -23,7 +23,7 @@ In an era of information overload and rapid AI advancement, "AI Anxiety" is real
 To ensure stable, high-quality output even when facing unstructured noise or emotional input, this project implements a two-stage AI routing architecture:
 ![planning_page](next-app/assets/planning.png)
 
-* *Note: Yellow highlights indicate simulated emotional noise used for testing system robustness.*
+* *Note: Yellow highlights indicate simulated emotions used for testing system robustness.*
 
 * **Intent Extraction:** The initial classifier cold-filters through emotional "noise" to precisely identify the user's core objectives (e.g., specific career goals).
 
